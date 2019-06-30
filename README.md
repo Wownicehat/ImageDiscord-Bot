@@ -26,7 +26,7 @@ Step to get the final image's URL
 <tbody>
 <tr>
 <td>url</td>
-  <td><strong>(Only on the first step)</strong> URL to get the first link</td>
+  <td><strong>(Only on the first step)</strong> URL to get the first link <strong>(You can use R{[number]}) to replace with a random string of the specified length (all lowercase from a-z)</strong></td>
   <td><strong>http://www.cutestpaw.com/random/</td>
 </tr>
 <tr>
