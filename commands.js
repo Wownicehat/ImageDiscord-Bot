@@ -1,5 +1,11 @@
 const request = require('request-promise');
 const rdmidregex = /R\{(\d*)\}/;
+/**
+ * Make a random string of a spicifed length
+ *
+ * @param {*} length
+ * @returns result
+ */
 function makestring(length)
 {
 	var result           = '';
@@ -9,6 +15,12 @@ function makestring(length)
 		result += characters.charAt(Math.floor(Math.random() * charactersLength));
 	return result;
 }
+/**
+ * Do the requests
+ *
+ * @param {*} cmd
+ * @returns
+ */
 function DoRequests(cmd) {
     return new Promise(async (resolve) => {
         var curl = undefined;
@@ -45,12 +57,19 @@ module.exports = {
         this.commands = param.commands;
     },
     DoCommand: function (command) {
+        if(command == "help")
+        {
+            return new Promise((r) => {
+                console.log("Sending help. . .");
+                r(true);
+            });
+        }
         var cmd = this.commands[command];
         if (cmd == undefined)
             return new Promise((r) => {
                 r(false)
             }); // empty promise
-        console.log("Executing " + command);
+
         return new Promise((resolve) => {
             var curl = DoRequests(cmd).then((curl) => {
                 resolve({
