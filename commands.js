@@ -1,17 +1,40 @@
 const request = require('request-promise');
-
+const rdmidregex = /R\{(\d*)\}/;
+function makestring(length)
+{
+	var result           = '';
+	var characters       = 'abcdefghijklmnopqrstuvwxyz';
+	var charactersLength = characters.length;
+	for ( var i = 0; i < length; i++ )
+		result += characters.charAt(Math.floor(Math.random() * charactersLength));
+	return result;
+}
 function DoRequests(cmd) {
     return new Promise(async (resolve) => {
         var curl = undefined;
 
         for (let index = 0; index < cmd.steps.length; index++) {
             var s = cmd.steps[index];
+            
             if (curl == undefined) {
-                curl = s.url;
+                var preurl = s.url;
+                var e = rdmidregex.exec(preurl);
+                if (e != undefined)
+                {
+                    var id = makestring(parseInt(e[1], 10));
+                    preurl = preurl.replace(rdmidregex, id);
+                    console.log({id, preurl});
+                }
+                curl = preurl;
             }
-            var a,b,body = await request(curl);
+            var a,b,body = await request({
+                url: curl,
+                headers:
+                {
+                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'
+                }});
             var regex = new RegExp(s.regex);
-            var g1 = regex.exec(body)[1]; // get group1
+            var g1 = regex.exec(body)[1]; // get group
             curl = g1;
         }
         resolve(curl);

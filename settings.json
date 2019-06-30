@@ -13,6 +13,15 @@
                     "regex": "class=\"single-cute-image\" alt=\".*\" src=\"(.*)\"\/>"
                 }
             ]
+        },
+        "rdm": {
+            "description": "Random prnt.sc image",
+            "steps": [
+                {
+                    "url": "https://prnt.sc/R{6}",
+                    "regex": "<img class=\"no-click screenshot-image\" src=\"(.*)\" crossorigin=\""
+                }
+            ]
         }
     }
 }

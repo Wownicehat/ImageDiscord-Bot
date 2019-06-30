@@ -33,6 +33,8 @@ client.on('message', msg => {
                     timestamp: new Date()
                 }
             })
+        }).catch((err)=>{
+            console.log(err);
         });
     }
 });
