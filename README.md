@@ -38,3 +38,8 @@ Step to get the final image's URL
 </table>
 
 Default command prefix is `^^` (it can be changed in settings.json)
+
+# Credit
+This is my first real discord bot using promises and it can be a little slow
+
+Packages: discord.js / request-promise
