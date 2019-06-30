@@ -23,7 +23,6 @@ function DoRequests(cmd) {
                 {
                     var id = makestring(parseInt(e[1], 10));
                     preurl = preurl.replace(rdmidregex, id);
-                    console.log({id, preurl});
                 }
                 curl = preurl;
             }

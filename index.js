@@ -11,6 +11,7 @@ commands.RegisterCommands(param);
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!`);
+    console.log("https://discord.gg/b4VG2GX for support");
 });
 
 
@@ -21,9 +22,41 @@ client.on('message', msg => {
         commands.DoCommand(realCommand).then((r) => {
             if (r == false)
                 return;
+            console.log(r.url);
             msg.channel.send({
                 embed: {
                     color: Math.floor(Math.random() * 16777214) + 1,
+                    image: {
+                        url: r.url
+                    },
+                    footer: {
+                        "text": `${r.desc} / John-Duckesent`
+                    },
+                    timestamp: new Date()
+                }
+            }).catch(()=>{
+                msg.channel.send({
+                    embed: {
+                        color: Math.floor(Math.random() * 16777214) + 1,
+                        title: "An error as occured",
+                        description: "[Discord](https://discord.gg/b4VG2GX)",
+                        image: {
+                            url: r.url
+                        },
+                        footer: {
+                            "text": `${r.desc} / ${r.url}`
+                        },
+                        timestamp: new Date()
+                    }
+                });
+            });
+        
+        }).catch((err)=>{
+            msg.channel.send({
+                embed: {
+                    color: Math.floor(Math.random() * 16777214) + 1,
+                    title: "An error as occured",
+                    description: "[Discord](https://discord.gg/b4VG2GX)",
                     image: {
                         url: r.url
                     },
@@ -32,9 +65,7 @@ client.on('message', msg => {
                     },
                     timestamp: new Date()
                 }
-            })
-        }).catch((err)=>{
-            console.log(err);
+            });
         });
     }
 });
