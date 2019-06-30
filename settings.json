@@ -1,0 +1,18 @@
+{
+    "token": "ENV",
+    "prefix": "^^",
+    "commands": {
+        "cute": {
+            "description": "Cutestpaw.com",
+            "steps": [
+                {
+                    "url": "http://www.cutestpaw.com/random/",
+                    "regex": "content=\"0; url=(.*)\""
+                },
+                {
+                    "regex": "class=\"single-cute-image\" alt=\".*\" src=\"(.*)\"\/>"
+                }
+            ]
+        }
+    }
+}
