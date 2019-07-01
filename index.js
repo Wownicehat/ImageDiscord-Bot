@@ -21,6 +21,7 @@ client.on('message', msg => {
 
     if (msg.content.startsWith(param.prefix)) {
         if (cooldown.has(msg.author.id)) {
+            msg.react("❌")
             return;
         }
         var realCommand = msg.content.substring(2, msg.content.length);
@@ -64,7 +65,7 @@ client.on('message', msg => {
             msg.channel.send({
                 embed: {
                     color: Math.floor(Math.random() * 16777214) + 1,
-                    description: `[Link](${r.url})`,
+                    description: `[Link](${imgurl})`,
                     image: {
                         url: imgurl
                     },
