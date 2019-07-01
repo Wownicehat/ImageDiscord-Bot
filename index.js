@@ -56,17 +56,20 @@ client.on('message', msg => {
 
 
 
-
-
+            var imgurl = r.url;
+            if(imgurl.startsWith("//"))
+            {
+                imgurl = "http:" + imgurl;
+            }
             msg.channel.send({
                 embed: {
                     color: Math.floor(Math.random() * 16777214) + 1,
-                    description: `[Link](${r.url}) | [Support](https://discord.gg/b4VG2GX)`,
+                    description: `[Link](${r.url})`,
                     image: {
-                        url: r.url
+                        url: imgurl
                     },
                     footer: {
-                        "text": `${r.desc} / John-Duckesent`
+                        "text": `${r.desc}`
                     },
                     timestamp: new Date()
                 }
