@@ -26,18 +26,52 @@ Step to get the final image's URL
 <tbody>
 <tr>
 <td>url</td>
-  <td><strong>(Only on the first step)</strong> URL to get the first link <strong>(You can use R{[number]}) to replace with a random string of the specified length (all lowercase from a-z)</strong></td>
-  <td><strong>http://www.cutestpaw.com/random/</td>
+  <td><strong>(Only on the first step)</strong> URL to get the first link <strong>(See: URL Functions)</strong></td>
+  <td>http://www.cutestpaw.com/random/</td>
 </tr>
 <tr>
 <td>regex</td>
   <td><strong>(Only group1 count)</strong> regex to get the next link</td>
-  <td><strong>content=\"0; url=(.*)\"</td>
+  <td>content=\"0; url=(.*)\"</td>
+</tr>
+</tbody>
+</table>
+Default command prefix is `^^` (it can be changed in settings.json)
+
+# URL Functions
+<table>
+<thead>
+<tr>
+<th>Function</th>
+<th>Description</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td>RI{min,max}</td>
+  <td><strong>Random int between min and max included</td>
+  <td>RI{1,10} : 5</td>
+</tr>
+<tr>
+  <td>RL{min,max}</td>
+  <td><strong>Random lowercase between min and max included</td>
+  <td>RL{1,10} : dajrdz</td>
+</tr>
+<tr>
+  <td>RU{min,max}</td>
+  <td><strong>Random uppercase between min and max included</td>
+  <td>RU{1,10} : HFJEZL</td>
+</tr>
+<tr>
+  <td>RX{min,max}</td>
+  <td><strong>Random mixt (no int) between min and max included</td>
+  <td>RX{1,10} : FLhHeGrE</td>
 </tr>
 </tbody>
 </table>
 
-Default command prefix is `^^` (it can be changed in settings.json)
+<strong>URL Functions only work in URLs not regexs</strong>
 
 # Credit
 This is my first real discord bot using promises and it can be a little slow
