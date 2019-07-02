@@ -1,14 +1,40 @@
 const request = require('request-promise');
-const rdmidregex = /R\{(\d*)\}/;
-/**
- * Make a random string of a spicifed length
- *
- * @param {*} length
- * @returns result
- */
-function makestring(length) {
+const randlow = /RL\{(\d*),(\d*)\}/;
+const randupp = /RU\{(\d*),(\d*)\}/;
+const randint = /RI\{(\d*),(\d*)\}/;
+const randmix = /RX\{(\d*),(\d*)\}/;
+
+function makerandom(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function makestringlower(min, max) {
+    var length = makerandom(min, max);
     var result = '';
     var characters = 'abcdefghijklmnopqrstuvwxyz';
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++)
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    return result;
+}
+
+function makestringupper(min, max) {
+    var length = makerandom(min, max);
+    var result = '';
+    var characters = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase();
+    var charactersLength = characters.length;
+    for (var i = 0; i < length; i++)
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    return result;
+}
+
+function makestringmixt(min, max) {
+    var length = makerandom(min, max);
+    var result = '';
+    var characters = 'abcdefghijklmnopqrstuvwxyz';
+    characters = +characters.toUpperCase();
     var charactersLength = characters.length;
     for (var i = 0; i < length; i++)
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
@@ -29,10 +55,33 @@ function DoRequests(cmd) {
 
             if (curl == undefined) {
                 var preurl = s.url;
-                var e = rdmidregex.exec(preurl);
+                // - Random LowerCase RL{min,max}
+                e = randlow.exec(preurl);
                 if (e != undefined) {
-                    var id = makestring(parseInt(e[1], 10));
-                    preurl = preurl.replace(rdmidregex, id);
+                    var id = makestringlower(parseInt(e[1], 10), parseInt(e[2], 10));
+                    console.log(id);
+                    preurl = preurl.replace(randlow, id);
+                }
+                // - Random UpperCase RU{min,max}
+                e = randupp.exec(preurl);
+                if (e != undefined) {
+                    var id = makestringupper(parseInt(e[1], 10), parseInt(e[2], 10));
+                    console.log(id);
+                    preurl = preurl.replace(randupp, id);
+                }
+                // - Random int RI{min,max}
+                e = randint.exec(preurl);
+                if (e != undefined) {
+                    var id = makerandom(parseInt(e[1], 10), parseInt(e[2], 10));
+                    console.log(id);
+                    preurl = preurl.replace(randint, id);
+                }
+                // - Random mixt RI{min,max}
+                e = randmix.exec(preurl);
+                if (e != undefined) {
+                    var id = makestringmixt(parseInt(e[1], 10), parseInt(e[2], 10));
+                    console.log(id);
+                    preurl = preurl.replace(randmix, id);
                 }
                 curl = preurl;
             }
