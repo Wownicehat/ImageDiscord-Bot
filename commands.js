@@ -34,7 +34,7 @@ function makestringmixt(min, max) {
     var length = makerandom(min, max);
     var result = '';
     var characters = 'abcdefghijklmnopqrstuvwxyz';
-    characters = +characters.toUpperCase();
+    characters = characters.toUpperCase();
     var charactersLength = characters.length;
     for (var i = 0; i < length; i++)
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
