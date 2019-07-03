@@ -34,6 +34,11 @@ Step to get the final image's URL
   <td><strong>(Only group1 count)</strong> regex to get the next link</td>
   <td>content=\"0; url=(.*)\"</td>
 </tr>
+  <tr>
+<td>retry</td>
+  <td><strong>(Not regex)</strong> If the body of the page contain this string, it will retry</td>
+  <td>0_173a7b_211be8ff <strong>(part of the "screenshot removed" file name for prnt.sc)</strong></td>
+</tr>
 </tbody>
 </table>
 Default command prefix is `^^` (it can be changed in settings.json)
